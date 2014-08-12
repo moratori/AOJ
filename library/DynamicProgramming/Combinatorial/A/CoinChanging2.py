@@ -26,8 +26,8 @@ def least(money,kind,coins):
                 minval = float("inf")
                 for num in xrange(0,(money/coin)+1,1):
                     tmp = solver(index - 1 , money - coin * num) + num
-                    memo[index][money] = tmp
                     if tmp < minval: minval = tmp
+                memo[index][money] = minval
                 return minval
     return solver(kind-1,money)
 
