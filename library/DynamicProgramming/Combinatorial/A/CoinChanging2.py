@@ -8,14 +8,13 @@ def read():
 
 
 def least(money,kind,coins):
-    memo = [[None for i in xrange(0,money+1,1)] for j in xrange(0,kind)]
+    memo = [[(0 if i == 0 else None) for i in xrange(0,money+1,1)] for j in xrange(0,kind)]
+
     def solver(index,money):
-        if not (memo[index][money] is None):
-            return memo[index][money]
-        elif money == 0:
-            return 0
-        elif (0 > index):
+        if (0 > index):
             return float("inf")
+        elif not (memo[index][money] is None):
+            return memo[index][money]
         else:
             coin = coins[index]
             if (coin > money):

@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 #coding:utf-8
 
+def read():
+    return map(int,raw_input().strip().split(" "))
+
 
 
 #
