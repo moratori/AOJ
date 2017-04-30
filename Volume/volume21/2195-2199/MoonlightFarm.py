@@ -2,57 +2,42 @@
 #coding:utf-8
 
 
-class Seed:
-    def __init__(self,name,price,a,b,c,d,e,number,unit,loop):
-        self.name = name
-        self.price = int(price)
-        self.a     = int(a)
-        self.b     = int(b)
-        self.c     = int(c)
-        self.d     = int(d)
-        self.e     = int(e)
-        self.number = int(number)
-        self.unit  = int(unit)
-        self.loop  = int(loop)
+def calc(v):
+    p,a,b,c,d,e,f,s,m = v
+    income = -1 * p
+    time = float(a + b + c)
+    for dummy in xrange(m):
+        time += d + e
+        income += f * s
+    return income/time
 
-    def getscore(self):
-        pass
+def solve(world):
+    vs = sorted([(name,calc(v)) for (name,v) in world],key=lambda x: -x[1])
+    result =[]
+    m = {each:[] for each in list(set([b for (a,b) in vs]))}
+    rs = sorted(m.keys(),key=lambda x: -x)
 
-    def getime(self):
-        pass
+    for r in rs:
+        for (a,b) in vs:
+            if b == r: m[r].append(a)
+    for each in rs:
+        for x in sorted(m[each]):
+            print x
 
-
-def getscore(seed):
-    pass
-
-
-def show(seed):
-    pass
+    return 
 
 def main():
-    n = input()
-    while (n != 0):
-        show([getscore(apply(Seed , raw_input().split(" "))) for dummy in xrange(n)])
-        n = input()
+    while True:
+        n = int(raw_input())
+        if n == 0 : break
+        world = []
+        for d in xrange(n):
+            sp = raw_input().split(" ")
+            world.append((sp[0],map(int,sp[1:])))
+        solve(world)
         print "#"
-    return
-
-
-main()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+if __name__ == "__main__":
+    main()
